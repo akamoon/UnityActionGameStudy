@@ -55,6 +55,7 @@ public class NatureDown : MonoBehaviour
         yield return new WaitForSeconds(1f);
         mSatiation = SATIFATION_DEFAULT_VALUE;
         mActionCoroutine = null;
+        var monoSingleton = MonoSingleton.Instance;
     }
 
     IEnumerator Sleep()

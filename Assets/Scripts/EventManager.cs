@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Formatters;
 using UnityEngine;
 
 namespace DefaultNamespace
@@ -38,6 +39,38 @@ namespace DefaultNamespace
                 mMessageDict.Add(message, action);
             }
         }
-            
+
+        public void Unsubscribe(string message)
+        {
+            mMessageDict.Remove(message);
+        }
+
+        public void Dispatch(string message, object[] args = null, bool
+            addToCache = false)
+        {
+            if (addToCache)
+            {
+                mDispatchCacheDict[message] = args;
+            }
+            else
+            {
+                Action<object[]> value = null;
+                if (mMessageDict.TryGetValue(message, out value))
+                {
+                    value(args);
+                }
+            }
+        }
+
+        public void ProcessDispatchCache(string message)
+        {
+            object[] value = null;
+            if (mDispatchCacheDict.TryGetValue(message, out value))
+            {
+                Dispatch(message, value);
+                mDispatchCacheDict.Remove(message);
+            }
+        }
+        
     }
 }

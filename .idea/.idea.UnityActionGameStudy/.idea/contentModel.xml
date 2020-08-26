@@ -8,6 +8,7 @@
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
           <e p="EventManager.cs" t="Include" />
+          <e p="MonoSingleton.cs" t="Include" />
           <e p="NatureDown.cs" t="Include" />
         </e>
       </e>
